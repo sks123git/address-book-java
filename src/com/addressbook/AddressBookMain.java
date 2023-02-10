@@ -1,6 +1,7 @@
 package com.addressbook;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 //Address book program
@@ -9,13 +10,14 @@ public class AddressBookMain extends ContactPerson {
         int flag = 0;
         int choice;
         AddressBookMain newPerson = new AddressBookMain();
-        ArrayList<AddressBookMain> person = new ArrayList<>();
+        ArrayList<ContactPerson> person = new ArrayList<>();
         System.out.println("Welcome to Address Book Program");
         Scanner scanner = new Scanner(System.in);
         while (flag != 1) {
             System.out.println("Enter 1 to add contact details");
             System.out.println("Enter 2 to edit details");
-            System.out.println("Enter 3 to exit");
+            System.out.println("Enter 3 to delete contact");
+            System.out.println("Enter 4 to exit");
             choice = scanner.nextInt();
             scanner.nextLine();
             if (choice == 1) {
@@ -31,19 +33,21 @@ public class AddressBookMain extends ContactPerson {
                 System.out.println("Enter state");
                 newPerson.setState(scanner.nextLine());
                 System.out.println("Enter zip code");
-                newPerson.setZip(scanner.nextInt());
+                newPerson.setZip(scanner.nextLine());
                 System.out.println("Enter phone number");
-                newPerson.setPhoneNumber(scanner.nextInt());
+                newPerson.setPhoneNumber(scanner.nextLine());
                 System.out.println("Enter Email");
-                scanner.nextLine();
                 newPerson.setEmail(scanner.nextLine());
-                person.add(newPerson);
-
+                ContactPerson contactPerson = new ContactPerson(newPerson.getFirstName(),newPerson.getLastName(), newPerson.getAddress(), newPerson.getCity(), newPerson.getState(), newPerson.getZip(), newPerson.getPhoneNumber(),newPerson.getEmail());
+                person.add(contactPerson);
                 System.out.println(person);
             } else if (choice == 2) {
                 System.out.println("Enter the first name whose contact to be edited");
                 String name = scanner.nextLine();
-                if (name.equals(newPerson.getFirstName()))
+                Iterator<ContactPerson> iterator = person.listIterator();
+                while (iterator.hasNext()){
+                    ContactPerson contactPerson= iterator.next();
+                if (name.equals(contactPerson.getFirstName()))
                 {
                     System.out.println("Edit first name");
                     newPerson.setFirstName(scanner.nextLine());
@@ -56,17 +60,30 @@ public class AddressBookMain extends ContactPerson {
                     System.out.println("Edit state");
                     newPerson.setState(scanner.nextLine());
                     System.out.println("Edit zip code");
-                    newPerson.setZip(scanner.nextInt());
+                    newPerson.setZip(scanner.nextLine());
                     System.out.println("Edit phone number");
-                    newPerson.setPhoneNumber(scanner.nextInt());
-                    scanner.nextLine();
+                    newPerson.setPhoneNumber(scanner.nextLine());
                     System.out.println("Edit Email");
                     newPerson.setEmail(scanner.nextLine());
-                    person.add(newPerson);
-                } else{
+                    ContactPerson person1 = new ContactPerson(newPerson.getFirstName(),newPerson.getLastName(), newPerson.getAddress(), newPerson.getCity(), newPerson.getState(), newPerson.getZip(), newPerson.getPhoneNumber(),newPerson.getEmail());
+                    person.add(person1);}
+                 else{
                     System.out.println("Provided name doesn't exist");
                 }
-            } else if (choice == 3) {
+                }
+            } else if (choice==3) {
+                System.out.println("Enter the first name of contact to delete");
+                String nameDelete;
+                nameDelete = scanner.nextLine();
+                Iterator<ContactPerson> iterator = person.listIterator();
+                while (iterator.hasNext()) {
+                    ContactPerson contactPerson= iterator.next();
+                    if (nameDelete.equals(contactPerson.getFirstName())) {
+                        person.remove(contactPerson);
+                    }
+                }
+                System.out.println(person);
+            } else if (choice == 4) {
                 flag = 1;
             }
         }

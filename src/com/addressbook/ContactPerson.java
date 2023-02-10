@@ -1,14 +1,7 @@
 package com.addressbook;
 
 public class ContactPerson {
-    String firstName = new String();
-    String lastName = new String();
-    String address = new String();
-    String city = new String();
-    String state = new String();
-    int zip;
-    long phoneNumber;
-    String email = new String();
+    private String firstName,lastName,address,city,state,zip,phoneNumber,email;
 
     public String getEmail() {
         return email;
@@ -18,19 +11,19 @@ public class ContactPerson {
         this.email = email;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(int zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
@@ -74,7 +67,7 @@ public class ContactPerson {
         return firstName;
     }
 
-    public ContactPerson(String firstName, String lastName, String address, String city, String state, int zip, int phoneNumber ){
+    public ContactPerson(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber,String email ){
         this.firstName=firstName;
         this.lastName=lastName;
         this.address=address;
@@ -82,7 +75,7 @@ public class ContactPerson {
         this.state=state;
         this.zip=zip;
         this.phoneNumber=phoneNumber;
-
+        this.email=email;
     }
     public ContactPerson(){
         super();
