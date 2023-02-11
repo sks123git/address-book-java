@@ -2,10 +2,15 @@ package com.addressbook;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 //Address book program
 public class AddressBookMain extends ContactPerson {
+
+//    public void add(){
+//
+//    }
     public static void main(String[] args) {
         int flag = 0;
         int choice;
@@ -44,10 +49,11 @@ public class AddressBookMain extends ContactPerson {
             } else if (choice == 2) {
                 System.out.println("Enter the first name whose contact to be edited");
                 String name = scanner.nextLine();
-                Iterator<ContactPerson> iterator = person.listIterator();
+                boolean found=false;
+                ListIterator<ContactPerson> iterator = person.listIterator();
                 while (iterator.hasNext()){
-                    ContactPerson contactPerson= iterator.next();
-                if (name.equals(contactPerson.getFirstName()))
+                    ContactPerson contact= iterator.next();
+                if (name.equals(contact.getFirstName()))
                 {
                     System.out.println("Edit first name");
                     newPerson.setFirstName(scanner.nextLine());
@@ -65,21 +71,29 @@ public class AddressBookMain extends ContactPerson {
                     newPerson.setPhoneNumber(scanner.nextLine());
                     System.out.println("Edit Email");
                     newPerson.setEmail(scanner.nextLine());
-                    ContactPerson person1 = new ContactPerson(newPerson.getFirstName(),newPerson.getLastName(), newPerson.getAddress(), newPerson.getCity(), newPerson.getState(), newPerson.getZip(), newPerson.getPhoneNumber(),newPerson.getEmail());
-                    person.add(person1);}
-                 else{
-                    System.out.println("Provided name doesn't exist");
+                    iterator.set(new ContactPerson(newPerson.getFirstName(),newPerson.getLastName(), newPerson.getAddress(), newPerson.getCity(), newPerson.getState(), newPerson.getZip(), newPerson.getPhoneNumber(),newPerson.getEmail()));
+                    found=true;
                 }
+
                 }
+                if (found){
+                    System.out.println("record is update");
+                    System.out.println(person);
+                }else {
+                    System.out.println("record not found");
+                }
+
             } else if (choice==3) {
                 System.out.println("Enter the first name of contact to delete");
                 String nameDelete;
                 nameDelete = scanner.nextLine();
                 Iterator<ContactPerson> iterator = person.listIterator();
                 while (iterator.hasNext()) {
-                    ContactPerson contactPerson= iterator.next();
-                    if (nameDelete.equals(contactPerson.getFirstName())) {
-                        person.remove(contactPerson);
+                    ContactPerson contact = iterator.next();
+                    if (nameDelete.equals(contact.getFirstName())) {
+                        iterator.remove();
+                    }else {
+                        System.out.println("Provided name doesn't exist");
                     }
                 }
                 System.out.println(person);
