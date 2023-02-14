@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Scanner;
 
-//Address book program
+//Address book program to add, update and delete records.
 public class AddressBookMain extends ContactPerson {
     public static AddressBookMain newPerson = new AddressBookMain();
     public static ArrayList<ContactPerson> person = new ArrayList<>();
@@ -90,12 +90,11 @@ public class AddressBookMain extends ContactPerson {
             System.out.println("record not found");
         }
     }
-    public static void main(String[] args) {
+    public void addContactsMain(AddressBookMain addressBookMain) {
         Scanner scanner = new Scanner(System.in);
         int flag = 0;
         int choice;
         System.out.println("Welcome to Address Book Program");
-
         while (flag != 1) {
             System.out.println("Enter 1 to add contact details");
             System.out.println("Enter 2 to edit details");
