@@ -2,6 +2,7 @@ package com.addressbook;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Optional;
 import java.util.Scanner;
 
 //Address book program to add, update and delete records.
@@ -11,7 +12,15 @@ public class AddressBookMain extends ContactPerson {
     public static void add(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter first name");
-        newPerson.setFirstName(scanner.nextLine());
+        String firstname = scanner.nextLine();
+        Optional<ContactPerson> isEmpty=person.stream()
+                .filter(name -> firstname.equals(name.getFirstName()))
+                .findAny();
+        if(!isEmpty.isEmpty()){
+            System.out.println("name already exist");
+            return;
+        }
+        newPerson.setFirstName(firstname);
         System.out.println("Enter last name");
         newPerson.setLastName(scanner.nextLine());
         System.out.println("Enter address");
