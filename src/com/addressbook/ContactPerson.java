@@ -80,7 +80,7 @@ public class ContactPerson {
     public ContactPerson(){
         super();
     }
-    @Override
+   @Override
     public String toString() {
         return "Employee [name=" + this.firstName +" "+ this.lastName + ", Address=" + this.address + ", City="
                 + this.city + ", state=" + this.state + ", zip=" + this.zip

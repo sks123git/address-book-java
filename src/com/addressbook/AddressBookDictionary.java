@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 //class to hold all the details and functionality of Address Book Dictionary
 public class AddressBookDictionary {
+    public static AddressBookMain addressBookMain=new AddressBookMain();
     public static Map<String,AddressBookMain> addressBookMainMap = new HashMap<>();
     public static Scanner scanner=new Scanner(System.in);
     public static void addAddressBook(){            //Method to add address book
@@ -45,11 +46,19 @@ public class AddressBookDictionary {
             }
         }
     }
+    //method to search person across address books
+    public static void searchPerson(){
+        System.out.println("Enter the name of city");
+        String inputCity= scanner.next();
+        addressBookMainMap.get(addressBookMain).person.stream()
+                .filter(city -> inputCity.equals(city.getCity()))
+                .forEach(element -> System.out.println(element));
+    }
 
     public static void main(String[] args) {
         int flag = 0;
         while (flag == 0) {
-            System.out.println("Kindly select the options to \n1. Add\n2. View\n3. Delete\n4. Select\n5. Exit");
+            System.out.println("Kindly select the options to \n1. Add\n2. View\n3. Delete\n4. Select\n5. Search according to city or state\n6. Exit");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             switch (choice) {
@@ -66,6 +75,8 @@ public class AddressBookDictionary {
                     AddressBookDictionary.selectAddressBookMap();
                     break;
                 case 5:
+                    AddressBookDictionary.searchPerson();
+                case 6:
                     flag = 1;
             }
         }
