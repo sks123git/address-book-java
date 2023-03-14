@@ -1,6 +1,9 @@
 package com.addressbook;
 
+import com.google.gson.Gson;
+
 import java.io.*;
+import java.lang.reflect.Type;
 import java.util.*;
 
 //Address book program to add, update and delete records.
@@ -13,6 +16,9 @@ public class AddressBookMain extends ContactPerson {
     public static ObjectInputStream  objectStreamReader = null;
     public static ObjectOutputStream objectOutputStream = null;
     public static OutputStreamWriter outputStreamWriter = null;
+    public static File fileJson = new File("AddressInJsonFormat.json");
+    public static FileWriter jsonWriter = null;
+    public static FileReader jsonReader = null;
     public static void add() throws Exception{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter first name");
@@ -51,6 +57,11 @@ public class AddressBookMain extends ContactPerson {
         outputStreamWriter = new OutputStreamWriter(new FileOutputStream(file));
         outputStreamWriter.write(person.toString());
         outputStreamWriter.close();
+        //Writing in json file
+        jsonWriter = new FileWriter(fileJson);
+        Gson gsonObj = new Gson();
+        gsonObj.toJson(person,jsonWriter);
+        jsonWriter.close();
         person.forEach(System.out::println);
     }
 
@@ -154,10 +165,18 @@ public class AddressBookMain extends ContactPerson {
                 .forEach(System.out::println);
     }
     public static void readFromfile() throws Exception {
-        if (file.isFile()) {
+        if (file2.isFile()) {
             try {
-                objectStreamReader = new ObjectInputStream(new FileInputStream(file));
+                objectStreamReader = new ObjectInputStream(new FileInputStream(file2));
                 person = (ArrayList<ContactPerson>) objectStreamReader.readObject();
+            }catch (Exception e){}
+        }
+        if (fileJson.isFile()) {
+            try {
+                jsonReader = new FileReader(fileJson);
+                ContactPerson contactPerson = new ContactPerson();
+                Gson gsonObj = new Gson();
+                person = gsonObj.fromJson(jsonReader, (Type) contactPerson);
             }catch (Exception e){}
         }
     }
