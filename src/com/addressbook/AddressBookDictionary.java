@@ -1,14 +1,18 @@
 package com.addressbook;
 
+import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 //class to hold all the details and functionality of Address Book Dictionary
 public class AddressBookDictionary {
+    public static String newBookName;
     public static AddressBookMain addressBookMain=new AddressBookMain();
     public static Map<String,AddressBookMain> addressBookMainMap = new HashMap<>();
+
     public static Scanner scanner=new Scanner(System.in);
-    public static void addAddressBook(){            //Method to add address book
+    public static void addAddressBook() {            //Method to add address book
         AddressBookMain addressBookMain = new AddressBookMain();
         System.out.println("Enter the name to add address book");
         String newBookName = scanner.next();
@@ -19,7 +23,7 @@ public class AddressBookDictionary {
                 System.out.println(string);
         }
     }
-    public static void selectAddressBookMap(){      //Method to select address book and perform operations add,delete,update etc
+    public static void selectAddressBookMap() throws Exception{      //Method to select address book and perform operations add,delete,update etc
         display();
         System.out.println("Enter the name of address book you want to select");
         String addressBookName = scanner.next();
@@ -55,7 +59,7 @@ public class AddressBookDictionary {
                 .forEach(element -> System.out.println(element));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         int flag = 0;
         while (flag == 0) {
             System.out.println("Kindly select the options to \n1. Add\n2. View\n3. Delete\n4. Select\n5. Search according to city or state\n6. Exit");

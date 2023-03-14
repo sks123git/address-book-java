@@ -1,12 +1,19 @@
 package com.addressbook;
 
+import java.io.*;
 import java.util.*;
 
 //Address book program to add, update and delete records.
 public class AddressBookMain extends ContactPerson {
     public static AddressBookMain newPerson = new AddressBookMain();
     public static ArrayList<ContactPerson> person = new ArrayList<>();
-    public static void add(){
+
+    public static File file = new File("Addressbook.csv");
+    public static File file2 = new File("AddressbookObj.csv");
+    public static ObjectInputStream  objectStreamReader = null;
+    public static ObjectOutputStream objectOutputStream = null;
+    public static OutputStreamWriter outputStreamWriter = null;
+    public static void add() throws Exception{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter first name");
         String firstname = scanner.nextLine();
@@ -34,8 +41,17 @@ public class AddressBookMain extends ContactPerson {
         newPerson.setEmail(scanner.nextLine());
         ContactPerson contactPerson = new ContactPerson(newPerson.getFirstName(),newPerson.getLastName(), newPerson.getAddress(), newPerson.getCity(), newPerson.getState(), newPerson.getZip(), newPerson.getPhoneNumber(),newPerson.getEmail());
         person.add(contactPerson);
-        person.forEach(System.out::println);
+
 //        System.out.println(person);
+        //Writing in object type
+        objectOutputStream = new ObjectOutputStream(new FileOutputStream(file2));
+        objectOutputStream.writeObject(person);
+        objectOutputStream.close();
+        //Writing in readable csv
+        outputStreamWriter = new OutputStreamWriter(new FileOutputStream(file));
+        outputStreamWriter.write(person.toString());
+        outputStreamWriter.close();
+        person.forEach(System.out::println);
     }
 
     public static void modify(){
@@ -137,9 +153,18 @@ public class AddressBookMain extends ContactPerson {
                 .sorted(Comparator.comparing(ContactPerson::getState))
                 .forEach(System.out::println);
     }
-
-    public void addContactsMain(AddressBookMain addressBookMain) {
+    public static void readFromfile() throws Exception {
+        if (file.isFile()) {
+            try {
+                objectStreamReader = new ObjectInputStream(new FileInputStream(file));
+                person = (ArrayList<ContactPerson>) objectStreamReader.readObject();
+            }catch (Exception e){}
+        }
+    }
+    public void addContactsMain(AddressBookMain addressBookMain) throws Exception {
         Scanner scanner = new Scanner(System.in);
+        readFromfile();
+        person.forEach(System.out::println);
         int flag = 0;
         int choice;
         System.out.println("Welcome to Address Book Program");
