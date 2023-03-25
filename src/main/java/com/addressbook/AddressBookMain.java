@@ -180,7 +180,7 @@ public class AddressBookMain extends ContactPerson {
             }catch (Exception e){}
         }
     }
-    public void addContactsMain(AddressBookMain addressBookMain) throws Exception {
+    public void addContactsMain() throws Exception {
         Scanner scanner = new Scanner(System.in);
         readFromfile();
         person.forEach(System.out::println);

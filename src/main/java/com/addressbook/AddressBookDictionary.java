@@ -25,15 +25,19 @@ public class AddressBookDictionary {
     }
     public static void selectAddressBookMap() throws Exception{      //Method to select address book and perform operations add,delete,update etc
         display();
+        int flag = 0;
         System.out.println("Enter the name of address book you want to select");
         String addressBookName = scanner.next();
         for (String key: addressBookMainMap.keySet()) {
             if(addressBookName.equals(key)){
-                addressBookMainMap.get(addressBookName).addContactsMain(addressBookMainMap.get(addressBookName));
+                addressBookMainMap.get(addressBookName).addContactsMain();
             }
             else {
-                System.out.println("Provided name not found");
+                flag = 1;
             }
+        }
+        if(flag==1){
+            System.out.println("Name not found");
         }
     }
 
