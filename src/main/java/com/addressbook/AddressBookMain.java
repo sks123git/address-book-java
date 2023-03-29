@@ -181,6 +181,7 @@ public class AddressBookMain extends ContactPerson {
         }
     }
     public void addContactsMain() throws Exception {
+        DBConnection con = new DBConnection();
         Scanner scanner = new Scanner(System.in);
         readFromfile();
         person.forEach(System.out::println);
@@ -197,6 +198,7 @@ public class AddressBookMain extends ContactPerson {
             System.out.println("Enter 7 to count sort by name");
             System.out.println("Enter 8 to count detail by city");
             System.out.println("Enter 9 to count detail by state");
+            System.out.println("Enter 10 to display data from database");
             choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
@@ -207,6 +209,7 @@ public class AddressBookMain extends ContactPerson {
                 case 3: delete();
                     break;
                 case 4: flag = 1;
+                con.close();
                     break;
                 case 5: countByCity();
                     break;
@@ -218,6 +221,8 @@ public class AddressBookMain extends ContactPerson {
                     break;
                 case 9: sortByState();
                     break;
+                case 10: con.display();
+                break;
             }
         }
     }

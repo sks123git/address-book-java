@@ -15,7 +15,7 @@ public class AddressBookDictionary {
     public static void addAddressBook() {            //Method to add address book
         AddressBookMain addressBookMain = new AddressBookMain();
         System.out.println("Enter the name to add address book");
-        String newBookName = scanner.next();
+         newBookName = scanner.next();
         addressBookMainMap.put(newBookName,addressBookMain);
     }
     public static void display(){                   //Method to show address book
