@@ -199,6 +199,7 @@ public class AddressBookMain extends ContactPerson {
             System.out.println("Enter 8 to count detail by city");
             System.out.println("Enter 9 to count detail by state");
             System.out.println("Enter 10 to display data from database");
+            System.out.println("Enter 11 to display count from database");
             choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
@@ -222,6 +223,8 @@ public class AddressBookMain extends ContactPerson {
                 case 9: sortByState();
                     break;
                 case 10: con.display();
+                break;
+                case 11: con.countDetailDB();
                 break;
             }
         }

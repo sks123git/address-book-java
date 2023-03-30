@@ -1,6 +1,8 @@
 package com.addressbook;
 
 import javax.xml.transform.Result;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,6 +12,8 @@ public class DBConnection {
 Connection con;
 PreparedStatement pstmt;
 ResultSet rs;
+String input;
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 DBConnection(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -31,6 +35,16 @@ DBConnection(){
                     +"  "+rs.getString(8)+"  "+rs.getString(9)
                     +"  "+rs.getString(10));
         }
+
+    }
+    public void countDetailDB() throws Exception {
+        System.out.println("Enter the name of city");
+        input = br.readLine();
+        pstmt = con.prepareStatement("SELECT COUNT(*) FROM address_book WHERE city = ?");
+        pstmt.setString(1,input);
+        rs = pstmt.executeQuery();
+        while (rs.next())
+            System.out.println(rs.getInt(1));
 
     }
 
