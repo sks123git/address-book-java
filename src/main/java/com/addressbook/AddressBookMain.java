@@ -45,7 +45,9 @@ public class AddressBookMain extends ContactPerson {
         newPerson.setPhoneNumber(scanner.nextLine());
         System.out.println("Enter Email");
         newPerson.setEmail(scanner.nextLine());
-        ContactPerson contactPerson = new ContactPerson(newPerson.getFirstName(),newPerson.getLastName(), newPerson.getAddress(), newPerson.getCity(), newPerson.getState(), newPerson.getZip(), newPerson.getPhoneNumber(),newPerson.getEmail());
+        System.out.println("Enter type");
+        newPerson.setType(scanner.nextLine());
+        ContactPerson contactPerson = new ContactPerson(newPerson.getFirstName(),newPerson.getLastName(), newPerson.getAddress(), newPerson.getCity(), newPerson.getState(), newPerson.getZip(), newPerson.getPhoneNumber(),newPerson.getEmail(), newPerson.getType());
         person.add(contactPerson);
 
 //        System.out.println(person);
@@ -91,7 +93,9 @@ public class AddressBookMain extends ContactPerson {
                 newPerson.setPhoneNumber(scanner.nextLine());
                 System.out.println("Edit Email");
                 newPerson.setEmail(scanner.nextLine());
-                iterator.set(new ContactPerson(newPerson.getFirstName(),newPerson.getLastName(), newPerson.getAddress(), newPerson.getCity(), newPerson.getState(), newPerson.getZip(), newPerson.getPhoneNumber(),newPerson.getEmail()));
+                System.out.println("Edit type");
+                newPerson.setType(scanner.nextLine());
+                iterator.set(new ContactPerson(newPerson.getFirstName(),newPerson.getLastName(), newPerson.getAddress(), newPerson.getCity(), newPerson.getState(), newPerson.getZip(), newPerson.getPhoneNumber(),newPerson.getEmail(),newPerson.getType()));
                 found=true;
             }
 
@@ -204,6 +208,7 @@ public class AddressBookMain extends ContactPerson {
             scanner.nextLine();
             switch (choice) {
                 case 1: add();
+                con.addDB();
                     break;
                 case 2: modify();
                     break;

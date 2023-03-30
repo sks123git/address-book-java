@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class DBConnection {
 Connection con;
@@ -45,6 +46,22 @@ DBConnection(){
         rs = pstmt.executeQuery();
         while (rs.next())
             System.out.println(rs.getInt(1));
+
+    }
+    public void addDB() throws Exception {
+        ContactPerson contacts = new ContactPerson();
+        pstmt = con.prepareStatement("INSERT INTO address_book(firstname,lastname,address,city,state,zip,phone,email,type) " +
+                "VALUES (?,?,?,?,?,?,?,?,?)");
+        pstmt.setString(1,contacts.getFirstName());
+        pstmt.setString(2,contacts.getLastName());
+        pstmt.setString(3,contacts.getAddress());
+        pstmt.setString(4,contacts.getCity());
+        pstmt.setString(5,contacts.getState());
+        pstmt.setString(6,contacts.getZip());
+        pstmt.setString(7,contacts.getPhoneNumber());
+        pstmt.setString(8,contacts.getEmail());
+        pstmt.setString(9,contacts.getType());
+        pstmt.executeUpdate();
 
     }
 

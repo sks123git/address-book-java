@@ -3,7 +3,7 @@ package com.addressbook;
 import java.io.Serializable;
 
 public class ContactPerson implements Serializable {
-    private String firstName,lastName,address,city,state,zip,phoneNumber,email;
+    private String firstName,lastName,address,city,state,zip,phoneNumber,email,type;
 
     public String getEmail() {
         return email;
@@ -69,7 +69,15 @@ public class ContactPerson implements Serializable {
         return firstName;
     }
 
-    public ContactPerson(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber,String email ){
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public ContactPerson(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber, String email, String type ){
         this.firstName=firstName;
         this.lastName=lastName;
         this.address=address;
@@ -78,6 +86,7 @@ public class ContactPerson implements Serializable {
         this.zip=zip;
         this.phoneNumber=phoneNumber;
         this.email=email;
+        this.type=type;
     }
     public ContactPerson(){
         super();
